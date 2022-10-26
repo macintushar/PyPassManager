@@ -147,8 +147,7 @@ def login(request):
         if user is not None:
             form = auth_login(request, user)
             return redirect('/')
-        else:
-            messages.info(request, f'account done not exit plz sign in')
+            
     form = AuthenticationForm()
     return render(request,'manager/login.html',{'form':form, 'name':'Login | PyPassManager'})
 
