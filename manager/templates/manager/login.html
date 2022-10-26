@@ -1,0 +1,53 @@
+{% extends "manager/layout.html" %}
+    {% block content %}
+    <br>
+    <form method="POST" class="post-form">  
+        {% csrf_token %}  
+        <div class="table-responsive-md container">
+            <table class="table table-borderless text-center">
+                <thead>
+                    <tr>    
+                        <th></th>
+                        <th>
+                            <h3 class="head-name">
+                                Login
+                            </h3>
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label class="col-form-label">Password:</label>  
+                        </td>
+                        <td>
+                                <input type="username" class="form-control" id="username" placeholder="Enter username" name="username">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="col-form-label">Password:</label>  
+                        </td>
+                        <td>
+                                <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <label class="col-form-label"></label>  
+                            <div class="">  
+                                <button type="submit" value="Submit" class="btn btn-primary">Submit</button>  
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+    </form>  
+
+    
+
+    {% endblock %}
