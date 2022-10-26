@@ -11,6 +11,7 @@ urlpatterns = [
     path('view-password/<uid>',views.ViewPassword, name=('View Password')),
     path('login/',views.login,name=('Login')),
     path('logout/', views.Logout, name=('Logout')),
+    path("register/", views.create_user, name=('register')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

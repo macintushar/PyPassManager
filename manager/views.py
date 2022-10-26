@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from .forms import PasswordsForm, NewPasswordsForm
+from .forms import PasswordsForm, NewPasswordsForm, NewUserForm
 from .models import Passwords
-from datetime import datetime
+
 from hash import HashPassword, UnhashPassword, GeneratePassword
-from django.contrib.auth.forms import AuthenticationForm 
-from django.contrib.auth import login as auth_login
-from django.contrib.auth import authenticate, logout
+
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm 
+from django.contrib.auth import authenticate, logout, login as auth_login
 from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/login/')
@@ -154,3 +154,13 @@ def login(request):
 def Logout(request):
     logout(request)
     return redirect("/login/")
+
+def create_user(request):
+    if request.method == "POST":
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            form = auth_login(request, user)
+            return redirect("/")
+    form = NewUserForm()
+    return render (request=request, template_name="manager/register.html", context={"register_form":form})
