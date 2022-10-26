@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-j6@8qm*+b+6+8cn0483dkzibpn!(fuuc_6^#r_6bx4ubop^5!4'
+# SECRET_KEY = 'django-insecure-j6@8qm*+b+6+8cn0483dkzibpn!(fuuc_6^#r_6bx4ubop^5!4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -128,5 +128,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-import django_heroku
-django_heroku.settings(locals())
+import django_on_heroku
+django_on_heroku.settings(locals())
