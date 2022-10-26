@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CSRF_TRUSTED_ORIGINS = ['https://*.herokuapp.com','https://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://py-pass-manager.herokuapp.com','https://*.127.0.0.1']
 
 ROOT_URLCONF = 'PyPassManager.urls'
 
