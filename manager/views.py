@@ -19,7 +19,7 @@ def index(request):
 @login_required(login_url='/login/')
 def NewPassword(request):
     if request.method == "POST":  
-        if request.POST.get("app_name") and request.POST.get("url") and request.POST.get("username") and request.POST.get("email") and request.POST.get("category") and request.POST.get("password") == None: 
+        if len(request.POST.get("password")) == 0: 
             new_password = GeneratePassword()
             new_password = HashPassword(new_password)
             encPassStr = new_password.decode('latin-1')
@@ -30,9 +30,7 @@ def NewPassword(request):
             username = request.POST.get('username') 
             email = request.POST.get('email')  
             category = request.POST.get('category')     
-            password = encPassStr               
-
-            print(app_name,url,username,email,category,password)      
+            password = encPassStr                  
 
             print("Form saved - Password Generated and Saved")
             try:
@@ -48,6 +46,7 @@ def NewPassword(request):
                 print("Invalid Form - Password Generated")
         
         else:
+            print("Password acquired from POST")
             new_password = request.POST.get('password')
             new_password = HashPassword(new_password)
             encPassStr = new_password.decode('latin-1')
