@@ -2,34 +2,34 @@ import rsa
 from os.path import exists
 import random as rnd
 
-BASE_DIR = "./keys/.privateKey.pem"
+BASE_DIR = "/keys/.privateKey.pem"
 
-public_key_exists = exists("./keys/.publicKey.pem")
-private_key_exists = exists("./keys/.privateKey.pem")
+public_key_exists = exists("/keys/.publicKey.pem")
+private_key_exists = exists("/keys/.privateKey.pem")
 
 
 if public_key_exists == True and private_key_exists == True :
     print("Printing Keys")
-    with open("./keys/.publicKey.pem", 'rb') as p:
+    with open("/keys/.publicKey.pem", 'rb') as p:
         PUBLIC_KEY = rsa.PublicKey.load_pkcs1(p.read())
 
-    with open("./keys/.privateKey.pem", 'rb') as p:
+    with open("/keys/.privateKey.pem", 'rb') as p:
         PRIVATE_KEY = rsa.PrivateKey.load_pkcs1(p.read())
 
 else:
     print("Generating Keys")
     (publicKey, privateKey) = rsa.newkeys(512)
     
-    with open("./keys/.publicKey.pem", 'wb') as p:
+    with open("/keys/.publicKey.pem", 'wb') as p:
         p.write(publicKey.save_pkcs1('PEM'))
     
-    with open("./keys/.privateKey.pem", 'wb') as p:
+    with open("/keys/.privateKey.pem", 'wb') as p:
         p.write(privateKey.save_pkcs1('PEM'))
     
-    with open("./keys/.publicKey.pem", 'rb') as p:
+    with open("/keys/.publicKey.pem", 'rb') as p:
         PUBLIC_KEY = rsa.PublicKey.load_pkcs1(p.read())
 
-    with open("./keys/.privateKey.pem", 'rb') as p:
+    with open("/keys/.privateKey.pem", 'rb') as p:
         PRIVATE_KEY = rsa.PrivateKey.load_pkcs1(p.read())
 
 
