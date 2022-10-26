@@ -5,6 +5,5 @@ This is a VERY NON SECURE Password Manager built with Django and deployed on Her
 The login for the website is:
 
 <b>Username:</b> testuser
-
 <b>Password:</b> testuserspassword
 
