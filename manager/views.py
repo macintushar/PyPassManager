@@ -8,6 +8,8 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, logout, login as auth_login
 from django.contrib.auth.decorators import login_required
 
+import clipboard
+
 @login_required(login_url='/login/')
 def index(request):
     data = Passwords.objects.all().values()
@@ -130,13 +132,11 @@ def ViewPassword(request,uid):
     vals = vals[0]
 
     passKey = vals['password']
-    print('PassKey len: ',len(passKey))
     data = vals
 
     hashedPass = passKey.encode('latin-1')
-
     actual = UnhashPassword(hashedPass=hashedPass)
-    print(len(actual))
+    clipboard.copy(actual)
 
     return render(request,'manager/view-password.html', {'form':data,'password':actual, 'name':'View Password | PyPassManager'})
 
