@@ -130,10 +130,12 @@ def ViewPassword(request,uid):
     vals = vals[0]
 
     passKey = vals['password']
-    print(len(passKey))
+    print('PassKey len: ',len(passKey))
     data = vals
 
-    actual = UnhashPassword(hashedPass=passKey)
+    hashedPass = passKey.encode('latin-1')
+
+    actual = UnhashPassword(hashedPass=hashedPass)
     print(len(actual))
 
     return render(request,'manager/view-password.html', {'form':data,'password':actual, 'name':'View Password | PyPassManager'})
@@ -148,7 +150,7 @@ def login(request):
             return redirect('/')
             
     form = AuthenticationForm()
-    return render(request,'manager/login.html',{'form':form, 'name':'Login | PyPassManager'})
+    return render(request,'manager/login.html',{'form':form})
 
 def Logout(request):
     logout(request)

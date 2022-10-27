@@ -39,7 +39,6 @@ def HashPassword(password):
     return encrypted_password
 
 def UnhashPassword(hashedPass):
-    hashedPass = hashedPass.encode('latin-1')
     decrypted_password = rsa.decrypt(hashedPass,PRIVATE_KEY).decode('latin-1')
     
     print(decrypted_password)
