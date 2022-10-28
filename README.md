@@ -10,6 +10,8 @@ The login for the demo website is:
 
 To implement this website for yourself, run the following commands
 
+<code>pip install -r ./requirements.txt</code>
+
 <code>source ./env/bin/activate</code>
 
 <code>python manage.py collectstatic</code>
