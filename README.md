@@ -1,6 +1,6 @@
 # PyPassManager
 
-This is a VERY NON SECURE Password Manager built with Django. A demo of this project can be found on Heroku <a href="https://py-pass-manager.herokuapp.com/"> here</a>.
+This is a SLIGHTLY SECURE Password Manager built with Django. A demo of this project can be found on Heroku <a href="https://py-pass-manager.herokuapp.com/"> here</a>.
 
 The login for the demo website is:
 
