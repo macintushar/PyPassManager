@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+
+    <form method="POST" class="post-form">  
+        {% csrf_token %}  
+        <div class="container center py-5"> 
+            <a class="nav-link" href="/">
+                <h3><</h3>
+            </a> 
+            <table class="table table-borderless">
+                <thead>
+                    <tr>    
+                        <th colspan="3">
+                            <h1 class="head-name text-center">
+                                Enter Account Details
+                            </h1>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label class="col-form-label">App Name:</label> 
+                        </td>
+                        <td>
+                            <input type="app_name" class="form-control" id="app_name" placeholder="Enter App Name" name="app_name">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="col-form-label">Website URL:</label>  
+                        </td>
+                        <td>
+                            <input type="url" class="form-control" id="url" placeholder="Enter URL" name="url">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="col-form-label">Username:</label>  
+                        </td>
+                        <td>
+                                <input type="username" class="form-control" id="username" placeholder="Enter username" name="username">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="col-form-label">Email ID:</label>  
+                        </td>
+                        <td>
+                            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email"> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="col-form-label">Password:</label>  
+                        </td>
+                        <td>
+                                <input type="password" class="form-control" id="password" placeholder="Enter password (Leave the field empty to generate a password)" name="password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="categories" class="form-label">Choose your categories from the list:</label>
+                        </td>
+                        <td>
+                                <select name="category" id="id_category" class="form-select">
+                                    <option value="TECH">Technology</option>
+                                    <option value="NONE">No category</option>
+                                    <option value="BIZ">Business</option>                          
+                                    <option value="EMAIL">Email</option>                          
+                                    <option value="ENT">Entertainment</option>                          
+                                    <option value="FIN">Finance</option>                          
+                                    <option value="GAMES">Games</option>                          
+                                    <option value="NEWS">News</option>                          
+                                    <option value="OTHER">Other</option>                          
+                                    <option value="SHOP">Shopping</option>                          
+                                    <option value="SOCIAL">Social media</option>                          
+                                    <option value="SPORTS">Sports</option>                          
+                                    <option value="TECH">Tech</option>                          
+                                    <option value="TRAVEL">Travel</option>                          
+                                    <option value="UTIL">Utilities</option>                          
+                                </select>  
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <label class="col-form-label"></label>  
+                            <div class="">  
+                                <button type="submit" value="Submit" class="btn btn-primary">Submit</button>  
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>  
+
+    {% endblock %}

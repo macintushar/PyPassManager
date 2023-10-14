@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+    
+    {% block content %}
+    {% load static %}
+        <div class="container">
+            <br>
+            <a href="create">
+                <button type="button" class="btn btn-info">
+                    + Add New Password
+                </button>
+            </a>
+        </div>
+        <br>
+        <div class="table-responsive-md container">
+            <table class="table text-center">
+                <thead>
+                    <tr>    
+                        <th>
+                            <h3 class="head-name">
+                                App Name
+                            </h3>
+                        </th>
+                        <th>
+                            <h3 class="head-name">
+                                Email
+                            </h3>
+                        </th>
+                        <th>
+                            <h3 class="head-name">
+                                Username
+                            </h3>
+                        </th>
+                        <th>
+                            <h3 class="head-name">
+                                Category
+                            </h3>
+                        </th>
+                        <th>
+                            <h3 class="head-name">
+                                View Password
+                            </h3>
+                        </th>
+                        <th>
+                            <h3 class="head-name">
+                                Delete
+                            </h3>
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data in datas %}
+                    <tr>
+                        <td>
+                            <b class="head-name">
+                                <h4>
+                                {{ data.app_name }}
+                                </h4>
+                            </b>
+                        </td>
+                        <td>{{ data.email }}</td>
+                        <td>{{ data.username }}</td>
+                        <td>{{ data.category }}</td>
+                        <td>
+                            <a href="view-password/{{ data.id }}">
+                                <button class="btn btn-primary">View Password</button>
+                            </a>
+                        </td>
+                        
+                        <td>
+                            <a href="delete/{{ data.id }}">
+                                <button class="btn btn-danger">Delete</button>
+                            </a>
+                        </td>
+
+                        {% if data.url %}
+                            <td>
+                                <a href="{{ data.url }}" target="_blank" rel="noopener noreferrer">
+                                    <button class="btn btn-outline-info">
+                                        <img src="https://res.cloudinary.com/dhzdzjgtd/image/upload/v1697304705/PyPassManager/redirect.png  " alt="redirect" width="20px">
+                                        &nbsp;  
+                                        Go to website
+                                    </button>
+                                </a>
+                            </td>
+                        {% else %}
+                            <td>
+                                <button class="btn btn-outline-info disabled">
+                                    <img src="https://res.cloudinary.com/dhzdzjgtd/image/upload/v1697304705/PyPassManager/redirect.png" alt="redirect" width="20px">
+                                    &nbsp;  
+                                    Go to website
+                                </button>
+                            </td>
+                        {% endif%}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    {% endblock %}
