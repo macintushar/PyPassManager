@@ -35,15 +35,10 @@ else:
 
 def HashPassword(password):
     encrypted_password = rsa.encrypt(password.encode('utf-8'),PUBLIC_KEY)
-    string_pass = str(encrypted_password)
     return encrypted_password
 
 def UnhashPassword(hashedPass):
-    decrypted_password = rsa.decrypt(hashedPass,PRIVATE_KEY).decode('utf-8')
-    
-    print(decrypted_password)
-    print(type(decrypted_password),len(decrypted_password))
-    
+    decrypted_password = rsa.decrypt(hashedPass,PRIVATE_KEY).decode('utf-8')    
     return decrypted_password
 
 def GeneratePassword():
