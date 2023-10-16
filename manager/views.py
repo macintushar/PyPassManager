@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
-from .forms import PasswordsForm, NewPasswordsForm, NewUserForm
-from hasher import GeneratePassword, HashPassword, UnhashPassword
-from .models import Passwords
 from django.contrib.auth import authenticate, logout, login as auth_login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm 
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
+
+from .forms import NewUserForm
+from hasher import GeneratePassword, HashPassword, UnhashPassword
+from .models import Passwords
 
 
 # Create your views here.
@@ -25,16 +27,22 @@ def login_user(request):
         if user is not None:
             form = auth_login(request, user)
             return redirect('/')
+        else:
+            messages.add_message(request, messages.WARNING, 'Invalid Username or Password')
+            form = AuthenticationForm()
+            return render(request,'login.html',{'form':form})
+
             
     form = AuthenticationForm()
     return render(request,'login.html',{'form':form})
 
+@login_required(login_url='/login/')
 def NewPassword(request):
         if request.method == "POST":  
             if len(request.POST.get("password")) == 0: 
                 new_password = GeneratePassword()
                 new_password = HashPassword(new_password)
-                encPassStr = new_password.decode('latin-1')
+                encPassStr = new_password.decode('utf-8')
                 encPassStr = str(encPassStr)
                 
                 user = request.user
@@ -59,7 +67,7 @@ def NewPassword(request):
                 print("Password acquired from POST")
                 new_password = request.POST.get('password')
                 new_password = HashPassword(new_password)
-                encPassStr = new_password.decode('latin-1')
+                encPassStr = new_password.decode('utf-8')
                 encPassStr = str(encPassStr)
                 
                 user = request.user
@@ -94,7 +102,7 @@ def ViewPassword(request,uid):
         if request.POST.get("password") != None:
             new_password = request.POST.get('password')
             new_password = HashPassword(new_password)
-            encPassStr = new_password.decode('latin-1')
+            encPassStr = new_password.decode('utf-8')
             encPassStr = str(encPassStr)
             
             user = request.user
@@ -133,11 +141,10 @@ def ViewPassword(request,uid):
     passKey = vals['password']
     data = vals
 
-    hashedPass = passKey.encode('latin-1')
+    hashedPass = passKey.encode('utf-8')
     actual = UnhashPassword(hashedPass=hashedPass)
 
     return render(request,'view-password.html', {'form':data,'password':actual, 'name':'View Password | PyPassManager'})
-
 
 def logout_user(request):
     logout(request)
@@ -151,6 +158,10 @@ def create_user(request):
             form = auth_login(request, user)
             return redirect("/")
         else:
+            messages.add_message(request, messages.ERROR, 'Wrong Password')
             print("Invalid Form")
-    form = NewUserForm()
-    return render (request=request, template_name="register.html", context={"register_form":form})
+            return render (request=request, template_name="register.html", context={"register_form":form})
+
+    else:
+        form = NewUserForm()
+        return render (request=request, template_name="register.html", context={"register_form":form})

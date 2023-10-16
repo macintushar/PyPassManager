@@ -29,6 +29,15 @@
                 </a>
             </div>
         </div>
+        <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% else %} class="alert alert-secondary" {% endif %}>
+                    <strong>{{ message }}</strong>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
         <br>
         <form method="POST" class="post-form">  
             {% csrf_token %}  
