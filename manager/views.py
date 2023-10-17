@@ -15,6 +15,12 @@ def index(request):
     user = request.user
     data = Passwords.objects.all().values().filter(user= user)
     data = list(data)
+    for i in data:
+        pwd = i["password"]
+        encoded_pwd = pwd.encode('latin-1')
+        password = UnhashPassword(encoded_pwd)
+        i["password"] = password
+
 
     context = {'datas':data, 'name':'Home | PyPassManager'}
     return render(request, "index.html", context= context)
@@ -42,7 +48,7 @@ def NewPassword(request):
             if len(request.POST.get("password")) == 0: 
                 new_password = GeneratePassword()
                 new_password = HashPassword(new_password)
-                encPassStr = new_password.decode('utf-8')
+                encPassStr = new_password.decode('latin-1')
                 encPassStr = str(encPassStr)
                 
                 user = request.user
@@ -53,7 +59,7 @@ def NewPassword(request):
                 category = request.POST.get('category')     
                 password = encPassStr                  
 
-                print("Form saved - Password Generated and Saved")
+                #print("Form saved - Password Generated and Saved")
                 try:
                     db = Passwords(user=user, app_name=app_name,url=url, username=username, email=email,password=password,category=category)
                     db.save()
@@ -64,10 +70,10 @@ def NewPassword(request):
                 return redirect('/')  
             
             else:
-                print("Password acquired from POST")
+                #print("Password acquired from POST")
                 new_password = request.POST.get('password')
                 new_password = HashPassword(new_password)
-                encPassStr = new_password.decode('utf-8')
+                encPassStr = new_password.decode('latin-1')
                 encPassStr = str(encPassStr)
                 
                 user = request.user
@@ -78,7 +84,7 @@ def NewPassword(request):
                 category = request.POST.get('category')     
                 password = encPassStr              
 
-                print(app_name,url,username,email,category,password)      
+                #print(app_name,url,username,email,category,password)      
 
                 try:
                     db = Passwords(user=user, app_name=app_name,url=url, username=username, email=email,password=password,category=category)
@@ -102,7 +108,7 @@ def ViewPassword(request,uid):
         if request.POST.get("password") != None:
             new_password = request.POST.get('password')
             new_password = HashPassword(new_password)
-            encPassStr = new_password.decode('utf-8')
+            encPassStr = new_password.decode('latin-1')
             encPassStr = str(encPassStr)
             
             user = request.user
@@ -113,7 +119,7 @@ def ViewPassword(request,uid):
             category = request.POST.get('category')     
             password = encPassStr              
 
-            print(app_name,url,username,email,category,password)      
+            #print(app_name,url,username,email,category,password)      
 
             try:
                 db = Passwords.objects.get(id=uid, user=user)
@@ -141,7 +147,7 @@ def ViewPassword(request,uid):
     passKey = vals['password']
     data = vals
 
-    hashedPass = passKey.encode('utf-8')
+    hashedPass = passKey.encode('latin-1')
     actual = UnhashPassword(hashedPass=hashedPass)
 
     return render(request,'view-password.html', {'form':data,'password':actual, 'name':'View Password | PyPassManager'})

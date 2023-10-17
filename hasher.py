@@ -34,11 +34,11 @@ else:
 
 
 def HashPassword(password):
-    encrypted_password = rsa.encrypt(password.encode('utf-8'),PUBLIC_KEY)
+    encrypted_password = rsa.encrypt(password.encode('latin-1'),PUBLIC_KEY)
     return encrypted_password
 
 def UnhashPassword(hashedPass):
-    decrypted_password = rsa.decrypt(hashedPass,PRIVATE_KEY).decode('utf-8')    
+    decrypted_password = rsa.decrypt(hashedPass,PRIVATE_KEY).decode('latin-1')    
     return decrypted_password
 
 def GeneratePassword():

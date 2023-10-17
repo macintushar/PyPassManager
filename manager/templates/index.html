@@ -37,7 +37,12 @@
                         </th>
                         <th>
                             <h3 class="head-name">
-                                View Password
+                                Password
+                            </h3>
+                        </th>
+                        <th>
+                            <h3 class="head-name">
+                                Edit
                             </h3>
                         </th>
                         <th>
@@ -52,18 +57,26 @@
                     {% for data in datas %}
                     <tr>
                         <td>
-                            <b class="head-name">
-                                <h4>
+                            <b >
+                                <h6>
                                 {{ data.app_name }}
-                                </h4>
+                                </h6>
                             </b>
                         </td>
                         <td>{{ data.email }}</td>
                         <td>{{ data.username }}</td>
                         <td>{{ data.category }}</td>
                         <td>
+                            <input id="password_field_{{ data.id }}" type="password" value="{{ data.password }}" style="width: 50%;" readonly />
+                            <img onclick="copyPassword('{{ data.id }}')" src="https://res.cloudinary.com/dhzdzjgtd/image/upload/v1697304705/PyPassManager/copy.png" alt="redirect" width="20px">
+                            <br>
+                            <input id="show-pwd" type="checkbox" onclick="showPassword('{{ data.id }}')" /> Show
+                        </td>
+                        <td>
                             <a href="view-password/{{ data.id }}">
-                                <button class="btn btn-primary">View Password</button>
+                                <button class="btn btn-success">
+                                    <img src="https://res.cloudinary.com/dhzdzjgtd/image/upload/v1697304705/PyPassManager/edit.png" alt="redirect" width="20px">
+                                </button>
                             </a>
                         </td>
                         
@@ -97,5 +110,23 @@
                 </tbody>
             </table>
         </div>
+
+        <script>
+            function showPassword(id) {
+                let password_field = document.getElementById("password_field_" + id);
+                console.log("ID: ",id)
+                if (password_field.type === "password") {
+                    password_field.type = "text";
+                } else {
+                    password_field.type = "password";
+                }
+            }
+
+            function copyPassword(id) {
+                let password_field = document.getElementById("password_field_" + id);
+                console.log("ID: ",id)
+                navigator.clipboard.writeText(password_field.value);
+            }
+        </script>
 
     {% endblock %}
